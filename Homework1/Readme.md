@@ -2,6 +2,9 @@
 
 > ### Убедительная просьба писать домашние задания на странице с домашним заданием! 
 
+# я сумел сделать публичный проект в gitlab ссылка ниже.
+# https://gitlab.com/test4555548/Test
+
 
 > # Я обучаюсь на курсе Python разработчик, активно использую django.
 > # Мне как python разработчику не понятно зачем нам нужен курс CI/CD?
@@ -48,6 +51,10 @@ stages:
   - build
   - test
   - deploy
+  - pages
+
+image: alpine
+
 
 build_job:
   stage: build
@@ -58,6 +65,7 @@ build_job:
       - path/to/artifact
     exclude:
       - path/to/artifact/excluded_file.txt
+
 
 test_job:
   stage: test
@@ -77,7 +85,7 @@ pages_job:
     paths:
       - public/
   only:
-    - master
+    - main
 
 create_file_job:
   stage: build
@@ -96,6 +104,17 @@ delete_file_job:
   stage: deploy
   script:
     - echo "Deleting the file..."
+
+pages:
+  stage: deploy
+  script:
+    - echo 'Publishing website to GitLab Pages'
+
+  artifacts:
+    paths:
+      - public/
+    exclude:
+      - public/example.txt
 
 ```
 
@@ -107,6 +126,10 @@ stages:
   - build
   - test
   - deploy
+  - pages
+
+image: alpine
+
 
 build_job:
   stage: build
@@ -117,6 +140,7 @@ build_job:
       - path/to/artifact
     exclude:
       - path/to/artifact/excluded_file.txt
+
 
 test_job:
   stage: test
@@ -136,7 +160,7 @@ pages_job:
     paths:
       - public/
   only:
-    - master
+    - main
 
 create_file_job:
   stage: build
@@ -155,6 +179,17 @@ delete_file_job:
   stage: deploy
   script:
     - echo "Deleting the file..."
+
+pages:
+  stage: deploy
+  script:
+    - echo 'Publishing website to GitLab Pages'
+
+  artifacts:
+    paths:
+      - public/
+    exclude:
+      - public/example.txt
 
 ```
 
@@ -230,4 +265,3 @@ pages:
       - public/example.txt
 
 ```
-![Снимок экрана 2023-12-06 в 20.52.57.png](%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202023-12-06%20%D0%B2%2020.52.57.png)
